@@ -1,23 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="45dp" >
-
-    <ImageButton
-        android:id="@+id/id_title_left_btn"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/black">
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="3dp"
-        android:background="@drawable/pic_02" />
+        android:orientation="vertical" >
+        <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+	        <ImageButton
+	            android:id="@+id/imageButton1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="我不是微信"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/textView1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/imageButton1"
+	            android:layout_centerHorizontal="true"
+	            android:text="监控" 
+	            android:textColor="@color/white"/>
 
+        </RelativeLayout>
+        <RelativeLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+			<ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+
+	        <TextView
+	            android:id="@+id/textView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/imageButton2"
+	            android:layout_centerHorizontal="true"
+	            android:text="设置"
+	            android:textColor="@color/white" />
+            
+        </RelativeLayout>
+        <RelativeLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+				<ImageButton
+	            android:id="@+id/imageButton3"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/ic_launcher" />
+	
+		        <TextView
+		            android:id="@+id/textView3"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_below="@+id/imageButton3"
+		            android:layout_centerHorizontal="true"
+		            android:text="商城"
+		            android:textColor="@color/white" />
+            
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

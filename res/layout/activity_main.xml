@@ -1,19 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/layout_full"
+        android:orientation="vertical">
+        <LinearLayout 
+                style="@style/layout_vertical"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+         	<fragment
+				 android:id="@+id/id_fragment_title"
+				 android:name="com.example.imonitor.TitleFragment"
+                 style="@style/layout_horizontal"
+                 android:background="#aa0000"
+                 android:layout_weight="2"/>
+           <fragment
+				 android:id="@+id/id_fragment_content"
+				 android:name="com.example.imonitor.ContentFragment"
+                 style="@style/layout_horizontal"
+                 android:background="#00aa00"
+                 android:layout_weight="6"/>    
+                 </LinearLayout>   
+</LinearLayout> 
+    
 
-    <fragment
-        android:id="@+id/id_fragment_title"
-        android:name="com.example.imonitor.TitleFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp" />
 
-    <fragment
-        android:layout_below="@id/id_fragment_title"
-        android:id="@+id/id_fragment_content"
-        android:name="com.example.imonitor.ContentFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+  
 
-</RelativeLayout>
