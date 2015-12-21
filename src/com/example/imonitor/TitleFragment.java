@@ -17,6 +17,7 @@ public class TitleFragment extends Fragment
 			Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_title, container, false);
+		
 		return view;
 	}
 }

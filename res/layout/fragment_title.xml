@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" 
-    android:background="@color/black">
+    android:background="@color/seashell">
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
@@ -14,12 +14,15 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:padding="15dp">
 	        <ImageButton
 	            android:id="@+id/imageButton1"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:src="@drawable/ic_launcher" />
+	            android:src="@drawable/monitor_title" 
+	            android:background="#0000" 
+	            />
 
 	        <TextView
 	            android:id="@+id/textView1"
@@ -28,19 +31,23 @@
 	            android:layout_below="@+id/imageButton1"
 	            android:layout_centerHorizontal="true"
 	            android:text="监控" 
-	            android:textColor="@color/white"/>
+	            android:textColor="#54676e"/>
 
         </RelativeLayout>
+
         <RelativeLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp" >
+
 			<ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/setting_title" 
+            android:background="#0000" />
 
 	        <TextView
 	            android:id="@+id/textView2"
@@ -49,19 +56,21 @@
 	            android:layout_below="@+id/imageButton2"
 	            android:layout_centerHorizontal="true"
 	            android:text="设置"
-	            android:textColor="@color/white" />
+	            android:textColor="#54676e" />
             
         </RelativeLayout>
         <RelativeLayout
         android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:padding="15dp">
 				<ImageButton
 	            android:id="@+id/imageButton3"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:src="@drawable/ic_launcher" />
+	            android:src="@drawable/shopping_title_128" 
+	            android:background="#0000" />
 	
 		        <TextView
 		            android:id="@+id/textView3"
@@ -70,7 +79,7 @@
 		            android:layout_below="@+id/imageButton3"
 		            android:layout_centerHorizontal="true"
 		            android:text="商城"
-		            android:textColor="@color/white" />
+		            android:textColor="#54676e" />
             
         </RelativeLayout>
     </LinearLayout>
