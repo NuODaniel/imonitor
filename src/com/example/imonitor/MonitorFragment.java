@@ -5,7 +5,7 @@ import java.io.IOException;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -108,8 +108,6 @@ public class MonitorFragment extends Fragment implements Callback
 
 	private Void OpenCameraAndSetSurfaceviewSize(int cameraId) {
 		mCamera = Camera.open(cameraId);
-//		android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-//		android.hardware.Camera.getCameraInfo(cameraId, info);
 
 		if(flag){
 			Log.d("hw",mCamera.getParameters().getPreviewSize().height+"__"+

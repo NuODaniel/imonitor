@@ -11,24 +11,24 @@
         android:layout_centerVertical="true"
         android:orientation="vertical" >
         <RelativeLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/rl_monitor_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
-        android:padding="15dp">
-	        <ImageButton
-	            android:id="@+id/imageButton1"
+        android:padding="15dp"
+        >"
+	        <ImageView
+	            android:id="@+id/img_monitor"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:src="@drawable/monitor_title" 
-	            android:background="#0000" 
 	            />
 
 	        <TextView
-	            android:id="@+id/textView1"
+	            android:id="@+id/text_monitor"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_below="@+id/imageButton1"
+	            android:layout_below="@+id/img_monitor"
 	            android:layout_centerHorizontal="true"
 	            android:text="监控" 
 	            android:textColor="#54676e"/>
@@ -36,47 +36,47 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/rl_account_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="15dp" >
+            android:padding="15dp" 
+            >
 
-			<ImageButton
-            android:id="@+id/imageButton2"
+			<ImageView
+            android:id="@+id/img_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/setting_title" 
-            android:background="#0000" />
+            android:src="@drawable/user_title"  />
 
 	        <TextView
-	            android:id="@+id/textView2"
+	            android:id="@+id/text_account"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_below="@+id/imageButton2"
+	            android:layout_below="@+id/img_account"
 	            android:layout_centerHorizontal="true"
-	            android:text="设置"
+	            android:text="我"
 	            android:textColor="#54676e" />
             
         </RelativeLayout>
         <RelativeLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/rl_shopping_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
-        android:padding="15dp">
-				<ImageButton
-	            android:id="@+id/imageButton3"
+        android:padding="15dp"
+        >
+				<ImageView
+	            android:id="@+id/img_shopping"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:src="@drawable/shopping_title_128" 
-	            android:background="#0000" />
+	            android:src="@drawable/shopping_title"  />
 	
 		        <TextView
-		            android:id="@+id/textView3"
+		            android:id="@+id/text_shopping"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:layout_below="@+id/imageButton3"
+		            android:layout_below="@+id/img_shopping"
 		            android:layout_centerHorizontal="true"
 		            android:text="商城"
 		            android:textColor="#54676e" />
