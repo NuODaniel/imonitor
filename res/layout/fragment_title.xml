@@ -5,14 +5,14 @@
     android:background="@color/seashell">
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:orientation="vertical" >
         <RelativeLayout
         android:id="@+id/rl_monitor_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
         android:padding="15dp"
@@ -22,6 +22,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:src="@drawable/monitor_title" 
+	            android:layout_centerHorizontal="true"
 	            />
 
 	        <TextView
@@ -37,7 +38,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_account_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp" 
@@ -47,7 +48,8 @@
             android:id="@+id/img_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/user_title"  />
+            android:src="@drawable/user_title"  
+            android:layout_centerHorizontal="true"/>
 
 	        <TextView
 	            android:id="@+id/text_account"
@@ -61,7 +63,7 @@
         </RelativeLayout>
         <RelativeLayout
         android:id="@+id/rl_shopping_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
         android:padding="15dp"
@@ -70,6 +72,7 @@
 	            android:id="@+id/img_shopping"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
 	            android:src="@drawable/shopping_title"  />
 	
 		        <TextView
