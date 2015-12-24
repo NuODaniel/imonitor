@@ -2,10 +2,9 @@ package com.example.imonitor;
 
 import java.io.IOException;
 
-import android.hardware.Camera;
-import android.hardware.Camera.Size;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.hardware.Camera;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
