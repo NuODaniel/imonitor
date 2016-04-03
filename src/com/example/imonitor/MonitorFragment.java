@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MonitorFragment extends Fragment implements Callback
+public class MonitorFragment extends Fragment implements Callback,Camera.PreviewCallback
 {
 	private SurfaceHolder sh;
 	private SurfaceView sv;
@@ -125,5 +125,10 @@ public class MonitorFragment extends Fragment implements Callback
 			mCamera = null;
 		}
 		return null;
+	}
+	@Override
+	public void onPreviewFrame(byte[] data, Camera camera) {
+		
+	
 	}
 }

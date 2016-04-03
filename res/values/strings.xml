@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">imonitor</string>
+    <string name="main_title">imonitor</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
