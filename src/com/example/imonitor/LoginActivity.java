@@ -1,6 +1,13 @@
 package com.example.imonitor;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -11,25 +18,27 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.imonitor.net.NetThread;
 
 
 /**
  * @author chao11.ma
  * <b>一个用户登录验证的demo
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements OnClickListener{
 
 
 	/**
 	 * 一个用户登录的后台验证异步任务
 	 */
-	private UserLoginTask mAuthTask = null;
+	private AccountLoginTask mAuthTask = null;
 
 	// 用户名（邮箱）
 	private String mEmail;
@@ -81,8 +90,18 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		// 点击注册按钮
+		findViewById(R.id.sign_up_button).setOnClickListener(this);
 	}
-
+	/**
+	 * going to the register activity
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(this,RegisterActivity.class);
+		startActivity(intent);
+	}
 
 	/**
 	 * <h1>关于用户登录验证的操作
@@ -135,7 +154,7 @@ public class LoginActivity extends Activity {
 			// 开始显示进度条
 			showProgress(true);
 			// 建立一个后台验证任务
-			mAuthTask = new UserLoginTask();
+			mAuthTask = new AccountLoginTask();
 			// 传入输入的用户名和密码
 			mAuthTask.execute(mEmail,mPassword);
 		}
@@ -188,15 +207,49 @@ public class LoginActivity extends Activity {
 	 * @author chao11.ma
 	 * 验证用户的正确性
 	 */
-	public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
+	public class AccountLoginTask extends AsyncTask<String, Void, Boolean> {
+		private String mServerUrl = "192.168.253.1";
+		private int mServerPort = 6789;
+		private String side = "MANAGE";
+		private String logmsg = null;
 		@Override
 		protected Boolean doInBackground(String... params) {
 
 			String email=params[0];
 			String password =params[1];
-			// 从数据库获得user
-			
-			return true;
+			String message = side+"##"+NetThread.ACCOUNT_LOGIN+"##"+
+							email+"$"+
+							password;
+			// 从数据库获得account
+			try {
+				Socket socket=new Socket(mServerUrl,mServerPort);
+				PrintWriter out = new PrintWriter(socket.getOutputStream());
+				BufferedReader bReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				
+				out.println(message);
+				String result = bReader.readLine();
+				String[] msg = result.split("##");
+				if(msg[0].equals("SERVER")){
+					if(msg[1].equals(NetThread.ACCOUNT_LOGIN)){
+						if(msg[2].equals("SUCCESS")){
+							return true;
+						}else{
+							logmsg = "账号/密码错误！";
+						}
+					}
+				}
+				
+				out.flush();
+				out.close();
+				socket.close();
+				return false;
+			} catch (UnknownHostException e) {
+				logmsg = "Can't find the server";
+				return false;
+			} catch (IOException e) {
+				logmsg = "IOException";
+				return false;
+			} 
 		}
 
 		@Override
@@ -210,7 +263,6 @@ public class LoginActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "登录成功",Toast.LENGTH_LONG).show();
 				Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 				startActivity(intent);
-				
 			} else {
 				mPasswordView.setError(getString(R.string.error_incorrect_password));
 				mPasswordView.requestFocus();
@@ -223,4 +275,7 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 		}
 	}
+
+
+	
 }
