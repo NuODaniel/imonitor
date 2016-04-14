@@ -4,31 +4,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+<!--     <ScrollView
+        android:id="@+id/monitor_collection_list_scroll_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" > -->
+ <LinearLayout
+        android:id="@+id/cm_list_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="使用Fragment做主面板"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="14dp"
-        android:text="Button" />
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
 
-    <SurfaceView
-        android:id="@+id/surfaceView1"
-        android:layout_width="320dp"
-        android:layout_height="240dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/cm_list_status_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-light"
+            android:text="载入中 请稍等&#8230;"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+	    <ListView
+	        android:id="@+id/monitor_collection_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" >
+	    </ListView>
 
 </RelativeLayout>

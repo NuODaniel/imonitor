@@ -1,14 +1,24 @@
 package com.example.imonitor.entity;
 
 public class Account {
-	private long accountid;
+	private int accountid;
 	private String accountname;
 	private String password;
 	private String email;
-	public long getAccountid() {
+	public Account(int accountid, String accountname, String email,
+			String password) {
+		this.accountid = accountid;
+		this.accountname = accountname;
+		this.email = email;
+		this.password = password;
+	}
+	public Account() {
+		
+	}
+	public int getAccountid() {
 		return accountid;
 	}
-	public void setAccountid(long accountid) {
+	public void setAccountid(int accountid) {
 		this.accountid = accountid;
 	}
 	public String getAccountname() {

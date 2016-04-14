@@ -1,4 +1,7 @@
-package com.example.imonitor;
+package com.example.imonitor.fragment;
+
+import com.example.imonitor.R;
+import com.example.imonitor.R.layout;
 
 import android.app.Fragment;
 import android.os.Bundle;

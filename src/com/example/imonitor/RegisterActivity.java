@@ -1,24 +1,18 @@
 package com.example.imonitor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.imonitor.net.NetThread;
 import com.example.imonitor.net.thread.RegisterThread;
@@ -48,10 +42,22 @@ public class RegisterActivity extends Activity {
 	private Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(android.os.Message msg) {
-			
+			String regState = null;
+			switch(msg.arg1){
+			case 1:finish();
+				regState = "注册成功";
+				break;
+			case 0:showProgress(true);
+				regState = "注册失败";
+				break;
+			}
+			Toast toast = Toast.makeText(getApplicationContext(),
+				     regState, Toast.LENGTH_LONG);
+				   toast.setGravity(Gravity.CENTER, 0, 0);
+				   toast.show();
 		};
 	};
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,15 +71,15 @@ public class RegisterActivity extends Activity {
 		
 		mRegisterFormView = findViewById(R.id.register_form);
 		mRegisterStatusView = findViewById(R.id.register_status);
-		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+		mLoginStatusMessageView = (TextView) findViewById(R.id.register_status_message);
 
-		findViewById(R.id.sign_in_button).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						attemptRegister();
-					}
-				});
+		findViewById(R.id.register_button).setOnClickListener(
+			new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					attemptRegister();
+				}
+			});
 	}
 
 	/**
@@ -145,7 +151,7 @@ public class RegisterActivity extends Activity {
 					mAccountname+"$"+
 					mEmail+"$"+
 					mPassword, mHandler);
-			new Thread();
+			new Thread(mRegThread).start();
 		}
 	}
 

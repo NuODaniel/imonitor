@@ -12,7 +12,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,35 +27,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.imonitor.entity.Account;
 import com.example.imonitor.net.NetThread;
+import com.example.imonitor.util.AccountInfoUtil;
 
-
-/**
- * @author chao11.ma
- * <b>一个用户登录验证的demo
- */
 public class LoginActivity extends Activity implements OnClickListener{
-
-
-	/**
-	 * 一个用户登录的后台验证异步任务
-	 */
+	private SharedPreferences prefs;
 	private AccountLoginTask mAuthTask = null;
-
-	// 用户名（邮箱）
 	private String mEmail;
-	// 密码
 	private String mPassword;
-
-	// 用户名框
+	
 	private EditText mEmailView;
-	//　密码框
 	private EditText mPasswordView;
-	// 包含整个用户登录的form框
 	private View mLoginFormView;
-	// 包含的进度条和消息验证文本框
 	private View mLoginStatusView;
-	// 消息验证提示框
 	private TextView mLoginStatusMessageView;
 
 	@Override
@@ -61,7 +48,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
-		// 获取默认的初期化文字
 		mEmailView = (EditText) findViewById(R.id.email);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
@@ -76,13 +62,9 @@ public class LoginActivity extends Activity implements OnClickListener{
 				return false;
 			}
 		});
-		// 包含整个用户登录的form框
 		mLoginFormView = findViewById(R.id.login_form);
-		// 包含的进度条和消息验证文本框
 		mLoginStatusView = findViewById(R.id.login_status);
-		// 消息验证提示框
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-		// 点击登录按钮
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -90,7 +72,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 						attemptLogin();
 					}
 				});
-		// 点击注册按钮
 		findViewById(R.id.sign_up_button).setOnClickListener(this);
 	}
 	/**
@@ -103,20 +84,13 @@ public class LoginActivity extends Activity implements OnClickListener{
 		startActivity(intent);
 	}
 
-	/**
-	 * <h1>关于用户登录验证的操作
-	 */
 	public void attemptLogin() {
-		// 建立的用户登录验证任务
 		if (mAuthTask != null) {
 			return;
 		}
-
-		// Reset errors.　重置消息
 		mEmailView.setError(null);
 		mPasswordView.setError(null);
 
-		// 获取界面输入数据
 		mEmail = mEmailView.getText().toString();
 		mPassword = mPasswordView.getText().toString();
 
@@ -146,24 +120,15 @@ public class LoginActivity extends Activity implements OnClickListener{
 		}
 
 		if (cancel) {
-			// 如果check没有通过   重新定位文本框焦点
 			focusView.requestFocus();
 		} else {
-			// 如果单项目check通过 就开始 进行后台登录验证
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-			// 开始显示进度条
 			showProgress(true);
-			// 建立一个后台验证任务
 			mAuthTask = new AccountLoginTask();
-			// 传入输入的用户名和密码
 			mAuthTask.execute(mEmail,mPassword);
 		}
 	}
 
-	/**
-	 * 显示进度条
-	 * Shows the progress UI and hides the login form.
-	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -202,11 +167,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 		}
 	}
 
-
-	/**
-	 * @author chao11.ma
-	 * 验证用户的正确性
-	 */
 	public class AccountLoginTask extends AsyncTask<String, Void, Boolean> {
 		private String mServerUrl = "192.168.253.1";
 		private int mServerPort = 6789;
@@ -220,26 +180,35 @@ public class LoginActivity extends Activity implements OnClickListener{
 			String message = side+"##"+NetThread.ACCOUNT_LOGIN+"##"+
 							email+"$"+
 							password;
-			// 从数据库获得account
 			try {
 				Socket socket=new Socket(mServerUrl,mServerPort);
 				PrintWriter out = new PrintWriter(socket.getOutputStream());
 				BufferedReader bReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				
 				out.println(message);
+				out.flush();
+				
 				String result = bReader.readLine();
 				String[] msg = result.split("##");
-				if(msg[0].equals("SERVER")){
+				if(msg[0].equals(side)){
 					if(msg[1].equals(NetThread.ACCOUNT_LOGIN)){
 						if(msg[2].equals("SUCCESS")){
+							String[] args = msg[3].split("\\$");
+							int accountid = Integer.parseInt(args[0]);
+							String accountname = args[1];
+							Account account = new Account(accountid,accountname,mEmail,mPassword);
+							
+							AccountInfoUtil acUtil = new AccountInfoUtil(getSharedPreferences("account_info", Context.MODE_PRIVATE));
+							acUtil.editAccountPre(account);
+							
 							return true;
 						}else{
-							logmsg = "账号/密码错误！";
+							logmsg = "wrong account/password";
 						}
 					}
 				}
 				
-				out.flush();
+				
 				out.close();
 				socket.close();
 				return false;
@@ -259,8 +228,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 
 			if (success) {
 				LoginActivity.this.finish();
-				// 跳转到成功登录页面
-				Toast.makeText(getApplicationContext(), "登录成功",Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "鐧诲綍鎴愬姛",Toast.LENGTH_LONG).show();
 				Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 				startActivity(intent);
 			} else {
