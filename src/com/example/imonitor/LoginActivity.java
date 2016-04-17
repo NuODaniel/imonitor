@@ -191,7 +191,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 				String result = bReader.readLine();
 				String[] msg = result.split("##");
 				if(msg[0].equals(side)){
-					if(msg[1].equals(NetThread.ACCOUNT_LOGIN)){
+					if(Integer.parseInt(msg[1])==NetThread.ACCOUNT_LOGIN){
 						if(msg[2].equals("SUCCESS")){
 							String[] args = msg[3].split("\\$");
 							int accountid = Integer.parseInt(args[0]);
@@ -201,6 +201,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 							AccountInfoUtil acUtil = new AccountInfoUtil(getSharedPreferences("account_info", Context.MODE_PRIVATE));
 							acUtil.editAccountPre(account);
 							
+							socket.close();
 							return true;
 						}else{
 							logmsg = "wrong account/password";

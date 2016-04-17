@@ -34,7 +34,7 @@ public class RegisterThread extends NetThread{
 			boolean regResult = false;
 			String[] msg = result.split("##");
 			if(msg[0].equals(side)){
-				if(msg[1].equals(NetThread.ACCOUNT_REGISTER)){
+				if(Integer.parseInt(msg[1])==NetThread.ACCOUNT_REGISTER){
 					if(msg[2].equals("SUCCESS")){
 						regResult = true;
 					}

@@ -1,13 +1,13 @@
 package com.example.imonitor;
 
-import com.example.imonitor.fragment.AccountFragment;
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
+
+import com.example.imonitor.fragment.CollectionListFragment;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction transaction = fm.beginTransaction();
-		transaction.replace(R.id.id_fragment_content, new AccountFragment());
+		transaction.replace(R.id.id_fragment_content, new CollectionListFragment());
 		transaction.commit();
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.imonitor;
+package com.example.imonitor.list;
 
 import android.view.View;
 import android.view.ViewGroup;

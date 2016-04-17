@@ -2,14 +2,15 @@ package com.example.imonitor.net;
 
 public abstract class NetThread implements Runnable{
 	/**
-	 * manage client send these orders to server
+	 * manage client send or get these orders i/o server
 	 */
 	
-	public static final String ACCOUNT_LOGIN = "ACCOUNT_LOGIN";
-	public static final String ACCOUNT_REGISTER = "ACCOUNT_REGISTER";
-	public static final String ADD_COLLECTION = "ADD_COLLECTION_CID_NAME_PWD";
-	public static final String START_TRANSFORM_VIDEO = "START_TRANSFORM_VIDEO";
-	public static final String GET_COLLECTION_MANAGE = "GET_CM_LIST";
+	public static final int ACCOUNT_LOGIN = 100006;
+	public static final int ACCOUNT_REGISTER = 100007;
+	public static final int ADD_COLLECTION = 100008;
+	public static final int START_TRANSFORM_VIDEO = 100009;
+	public static final int TRANSFROM_DATA = 100010;
+	public static final int GET_COLLECTION_MANAGE = 100011;
 	
 	public String side = "MANAGE";
 	protected String message;

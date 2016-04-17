@@ -40,7 +40,7 @@
 	
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_imonitor"
         android:label="@string/app_name"
         android:screenOrientation="landscape"
         android:theme="@style/AppTheme" >
@@ -67,11 +67,23 @@
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			android:windowSoftInputMode="stateAlwaysHidden">
 		</activity>
+		<activity 
+		    android:name=".MonitorActivity"
+			android:label="@string/app_name"
+			android:screenOrientation="landscape"
+			>
+		</activity>
         <activity
             android:name="com.example.imonitor.RegisterActivity"
             android:label="@string/title_activity_register"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <service android:name="com.example.imonitor.net.service.RetrieveDataService"
+            android:exported="false">  
+            <intent-filter>  
+                <action android:name="com.example.imonitor.net.service.RetrieveDataService"/>  
+            </intent-filter>              
+	</service>  
     </application>
 
 </manifest>

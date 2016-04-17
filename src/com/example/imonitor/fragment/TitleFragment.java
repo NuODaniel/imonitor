@@ -36,6 +36,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 	private TextView txtSubTitle;
 	private ImageButton btnSubAction;
 	private ImageView ivSubIcon;
+	private ImageButton btnSubRefresh;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -53,6 +54,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 		txtSubTitle = (TextView)this.getActivity().findViewById(R.id.txt_sub_title_content);
 		btnSubAction = (ImageButton)this.getActivity().findViewById(R.id.btn_sub_title_action);
 		ivSubIcon = (ImageView)this.getActivity().findViewById(R.id.iv_sub_title_icon);
+		btnSubRefresh = (ImageButton)this.getActivity().findViewById(R.id.btn_sub_title_refresh);
 		
 		btnSubAction.setClickable(true);
 		btnSubAction.setOnClickListener(new OnClickListener() {
@@ -64,6 +66,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 				startActivity(intent);
 			}
 		});
+		btnSubRefresh.setClickable(true);
 		
 		btnMonitor.setClickable(true);
 		btnAccount.setClickable(true);
@@ -125,7 +128,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 		btnSubAction.setColorFilter(0);;
 		ivSubIcon.setColorFilter(0);
 		btnSubAction.setVisibility(android.view.View.VISIBLE);
-		
+		btnSubRefresh.setVisibility(android.view.View.VISIBLE);
 		break;
 		case 2:
 		txtSubTitle.setText("我的账号");
@@ -133,6 +136,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 		btnSubAction.setColorFilter(0);;
 		ivSubIcon.setColorFilter(0);
 		btnSubAction.setVisibility(android.view.View.GONE);
+		btnSubRefresh.setVisibility(android.view.View.GONE);
 		break;
 		case 3:
 		txtSubTitle.setText("商城");
@@ -140,6 +144,7 @@ public class TitleFragment extends Fragment implements OnClickListener,OnTouchLi
 		btnSubAction.setColorFilter(0);;
 		ivSubIcon.setColorFilter(0);
 		btnSubAction.setVisibility(android.view.View.GONE);
+		btnSubRefresh.setVisibility(android.view.View.GONE);
 		break;
 		}
 	}
