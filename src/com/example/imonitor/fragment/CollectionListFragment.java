@@ -80,7 +80,7 @@ public class CollectionListFragment extends Fragment
 				if(beginThread == null){
 					BeginMonitorThread beginThread = new BeginMonitorThread("MANAGE##"+
 														NetThread.START_TRANSFORM_VIDEO+"##"+
-														accountid+"$"+collectionid,beginHandler);
+														collectionid+"$"+accountid,beginHandler);
 					new Thread(beginThread).start();
 				}
 			}
@@ -92,11 +92,14 @@ public class CollectionListFragment extends Fragment
 		collectionListView.setAdapter(listAdapter); 
 	}
 	
+	/**
+	 * handle the begin transform request result
+	 */
 	Handler beginHandler = new Handler(){
 		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.arg1){
-			case 0:
+			case 0://collection is offline
 				Toast.makeText(getActivity(), "can't begin to retrieve data", Toast.LENGTH_SHORT).show();
 				break;
 			case 1:
