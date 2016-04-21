@@ -11,6 +11,7 @@ public abstract class NetThread implements Runnable{
 	public static final int START_TRANSFORM_VIDEO = 100009;
 	public static final int TRANSFROM_DATA = 100010;
 	public static final int GET_COLLECTION_MANAGE = 100011;
+	public static final int END_TRANSFORM_VIDEO = 100012;
 	
 	public String side = "MANAGE";
 	protected String message;
@@ -24,5 +25,9 @@ public abstract class NetThread implements Runnable{
 		mServerUrl = serverUrl;
 		mServerPort = serverPort;
 	}
+	public NetThread() {
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }

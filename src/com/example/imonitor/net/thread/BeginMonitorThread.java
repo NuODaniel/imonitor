@@ -17,9 +17,16 @@ public class BeginMonitorThread extends NetThread{
 	
 	private Handler mHandler;
 	private String logmsg;
+	private int mCollectionid;
+	private int mAccountid;
 
-	public BeginMonitorThread(String msg,Handler handler) {
-		super(msg);
+	public BeginMonitorThread(int collectionid,int accountid,Handler handler) {
+		super();
+		message = "MANAGE##"+
+					NetThread.START_TRANSFORM_VIDEO+"##"+
+					collectionid+"$"+accountid;
+		mCollectionid = collectionid;
+		mAccountid = accountid;
 		mHandler = handler;
 	}
 
@@ -39,9 +46,12 @@ public class BeginMonitorThread extends NetThread{
 			if(msg[0].equals(side)){
 				if(Integer.parseInt(msg[1])==NetThread.START_TRANSFORM_VIDEO){
 					if(msg[2].equals("SUCCESS")){
-						handlerMessage.arg1 = 1;
+						handlerMessage.what = 1;
+						handlerMessage.arg1 = mCollectionid;
+						handlerMessage.arg2 = mAccountid;
+						
 					}else{
-						handlerMessage.arg1 = 0;
+						handlerMessage.what = 0;
 						logmsg = "can't start";
 					}
 				}

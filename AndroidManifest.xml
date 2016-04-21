@@ -78,12 +78,10 @@
             android:label="@string/title_activity_register"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
-        <service android:name="com.example.imonitor.net.service.RetrieveDataService"
-            android:exported="false">  
-            <intent-filter>  
-                <action android:name="com.example.imonitor.net.service.RetrieveDataService"/>  
-            </intent-filter>              
-	</service>  
+        <service 
+		    android:name="com.example.imonitor.net.service.RetrieveDataService"
+		    android:exported="false">
+		</service>
     </application>
 
 </manifest>

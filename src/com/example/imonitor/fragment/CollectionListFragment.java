@@ -42,7 +42,8 @@ public class CollectionListFragment extends Fragment
 	private View rootView = null;
 	private static final String TAG = "CollectionListFragment";  
 	private BeginMonitorThread beginThread;
-	
+	private int mCollectionId;
+	private int mAccountId;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -74,13 +75,12 @@ public class CollectionListFragment extends Fragment
 			@Override
 			public void OnClick(int position, View v) {
 				Map<String,Object> item = listAdapter.getItem(position);
-				String collectionid = item.get("id").toString();
+				mCollectionId = Integer.parseInt(item.get("id").toString());
 				Account accountinfo = new AccountInfoUtil(getActivity()).getAccountFromPre();
-				String accountid = Integer.toString(accountinfo.getAccountid());
+				mAccountId = accountinfo.getAccountid();
 				if(beginThread == null){
-					BeginMonitorThread beginThread = new BeginMonitorThread("MANAGE##"+
-														NetThread.START_TRANSFORM_VIDEO+"##"+
-														collectionid+"$"+accountid,beginHandler);
+					
+					BeginMonitorThread beginThread = new BeginMonitorThread(mCollectionId,mAccountId,beginHandler);
 					new Thread(beginThread).start();
 				}
 			}
@@ -98,12 +98,14 @@ public class CollectionListFragment extends Fragment
 	Handler beginHandler = new Handler(){
 		@Override
 		public void handleMessage(android.os.Message msg) {
-			switch(msg.arg1){
+			switch(msg.what){
 			case 0://collection is offline
 				Toast.makeText(getActivity(), "can't begin to retrieve data", Toast.LENGTH_SHORT).show();
 				break;
 			case 1:
 				Intent intent = new Intent();
+				intent.putExtra("collectionid",mCollectionId);
+				intent.putExtra("accountid",mAccountId);
 				intent.setClass(getActivity(), MonitorActivity.class);
 				
 				startActivity(intent);
