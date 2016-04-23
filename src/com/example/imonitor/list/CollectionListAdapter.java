@@ -66,7 +66,7 @@ public class CollectionListAdapter extends BaseAdapter{
 		 ImageButton btnPlay = (ImageButton)convertView.findViewById(R.id.btn_item_collection_play);
 		 
 		 if(!data.isEmpty() && data != null){
-			itemPreview.setImageResource(R.drawable.ic_launcher);
+			itemPreview.setImageResource(R.drawable.ic_device);
 		 	itemCid.setText("cid:"+data.get(position).get("cid").toString());
 		 	itemUsername.setText("username:"+data.get(position).get("username").toString());
 		 	btnSetting.setTag(position);
