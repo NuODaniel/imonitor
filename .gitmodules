@@ -1,0 +1,3 @@
+[submodule "src/mypythoncode"]
+	path = src/mypythoncode
+	url = https://github.com/NuODaniel/py3_awesome_webapp.git
